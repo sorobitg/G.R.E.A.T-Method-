@@ -146,7 +146,10 @@
       `;
       badge.addEventListener('click', () => scrollToCard(s.id));
       badge.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') scrollToCard(s.id);
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          scrollToCard(s.id);
+        }
       });
       strip.appendChild(badge);
     });
@@ -200,7 +203,10 @@
       const header = card.querySelector('.card-header');
       header.addEventListener('click', () => toggleCard(s.id));
       header.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') toggleCard(s.id);
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleCard(s.id);
+        }
       });
 
       // Auto-save textarea
@@ -245,6 +251,7 @@
 
     // Progress bar
     document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-bar').setAttribute('aria-valuenow', pct);
     document.getElementById('progress-text').textContent =
       `${completedCount} / ${STAGES.length} stages complete (${pct}%)`;
 
