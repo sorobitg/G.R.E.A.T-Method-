@@ -1,0 +1,358 @@
+/* ===== Base Reset & Variables ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-bg:        #f0f4f8;
+  --color-surface:   #ffffff;
+  --color-primary:   #2c6e49;
+  --color-primary-lt:#4c956c;
+  --color-accent:    #d68910;
+  --color-text:      #1a1a2e;
+  --color-muted:     #6b7280;
+  --color-border:    #d1d5db;
+  --color-done-bg:   #d1fae5;
+  --color-done-text: #065f46;
+  --radius:          12px;
+  --shadow:          0 2px 12px rgba(0,0,0,.08);
+  --transition:      .25s ease;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  padding: 0 0 60px;
+}
+
+/* ===== Header ===== */
+header {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-lt));
+  color: #fff;
+  padding: 40px 24px 32px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -.5px;
+}
+
+header p {
+  margin-top: 8px;
+  font-size: 1rem;
+  opacity: .88;
+}
+
+/* ===== Overall Progress Bar ===== */
+.progress-wrapper {
+  max-width: 720px;
+  margin: 28px auto 0;
+  padding: 0 24px;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: .85rem;
+  color: rgba(255,255,255,.85);
+  margin-bottom: 6px;
+}
+
+.progress-track {
+  background: rgba(255,255,255,.3);
+  border-radius: 99px;
+  height: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #fff;
+  border-radius: 99px;
+  width: 0%;
+  transition: width .5s ease;
+}
+
+/* ===== Stage Badge Strip ===== */
+.stage-strip {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  max-width: 720px;
+  margin: 32px auto 0;
+  padding: 0 24px;
+}
+
+.stage-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.stage-badge .circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 3px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.stage-badge .label {
+  font-size: .72rem;
+  font-weight: 600;
+  color: var(--color-muted);
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  transition: color var(--transition);
+}
+
+.stage-badge.active .circle   { border-color: var(--color-primary); background: #e6f4ed; }
+.stage-badge.active .label    { color: var(--color-primary); }
+.stage-badge.completed .circle { border-color: var(--color-done-text); background: var(--color-done-bg); }
+.stage-badge.completed .label  { color: var(--color-done-text); }
+
+/* ===== Cards Container ===== */
+main {
+  max-width: 720px;
+  margin: 36px auto 0;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ===== Stage Card ===== */
+.stage-card {
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.stage-card.active {
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 20px rgba(44,110,73,.18);
+}
+
+.stage-card.completed {
+  border-color: var(--color-done-text);
+  opacity: .85;
+}
+
+/* Card Header */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.card-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.card-title-block {
+  flex: 1;
+}
+
+.card-letter {
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: 2px;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.card-subtitle {
+  font-size: .85rem;
+  color: var(--color-muted);
+  margin-top: 2px;
+}
+
+.card-status {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.card-chevron {
+  font-size: 1rem;
+  color: var(--color-muted);
+  transition: transform var(--transition);
+  flex-shrink: 0;
+}
+
+.stage-card.open .card-chevron {
+  transform: rotate(180deg);
+}
+
+/* Card Body (collapsible) */
+.card-body {
+  display: none;
+  padding: 0 24px 24px;
+  border-top: 1px solid var(--color-border);
+}
+
+.stage-card.open .card-body {
+  display: block;
+}
+
+.card-description {
+  font-size: .9rem;
+  color: var(--color-muted);
+  line-height: 1.6;
+  margin-top: 16px;
+}
+
+/* Textarea */
+.card-textarea-label {
+  display: block;
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-top: 20px;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+}
+
+.card-textarea {
+  width: 100%;
+  min-height: 100px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: .9rem;
+  font-family: inherit;
+  color: var(--color-text);
+  resize: vertical;
+  transition: border-color var(--transition);
+}
+
+.card-textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+/* Prompts list */
+.prompts-list {
+  margin-top: 14px;
+  padding-left: 20px;
+  list-style: disc;
+}
+
+.prompts-list li {
+  font-size: .88rem;
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+
+/* Action row */
+.card-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 9px 20px;
+  border-radius: 8px;
+  border: none;
+  font-size: .9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition), transform .1s;
+}
+
+.btn:active { transform: scale(.97); }
+
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.btn-primary:hover { background: var(--color-primary-lt); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.btn-secondary:hover { background: #e6f4ed; }
+
+.btn-danger {
+  background: transparent;
+  color: #b91c1c;
+  border: 2px solid #fca5a5;
+}
+
+.btn-danger:hover { background: #fef2f2; }
+
+/* Completed banner */
+.completed-banner {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-done-bg);
+  color: var(--color-done-text);
+  font-size: .85rem;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin-top: 16px;
+}
+
+.stage-card.completed .completed-banner { display: flex; }
+
+/* ===== Reset Button ===== */
+.reset-wrapper {
+  max-width: 720px;
+  margin: 32px auto 0;
+  padding: 0 24px;
+  text-align: right;
+}
+
+/* ===== Celebration Banner ===== */
+.celebrate {
+  display: none;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.celebrate-inner {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-lt));
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  text-align: center;
+}
+
+.celebrate-inner h2 { font-size: 1.5rem; margin-bottom: 8px; }
+.celebrate-inner p  { opacity: .88; font-size: .95rem; }

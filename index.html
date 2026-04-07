@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="An interactive coaching dashboard for working through the G.R.E.A.T. Method™ — Goal, Reality, Explore, Action, Track." />
+  <title>G.R.E.A.T. Method™ — Coaching Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Header ──────────────────────────────────────────── -->
+  <header>
+    <h1 id="dashboard-heading">Your Coaching Dashboard</h1>
+    <p id="dashboard-subheading">Progress through each stage of the G.R.E.A.T. Method™</p>
+
+    <!-- Overall progress bar -->
+    <div class="progress-wrapper">
+      <div class="progress-label">
+        <span>Overall Progress</span>
+        <span id="progress-text">0 / 5 stages complete (0%)</span>
+      </div>
+      <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+    </div>
+
+    <!-- Stage badge strip -->
+    <div class="stage-strip" id="stage-strip" role="navigation" aria-label="Stage navigation"></div>
+  </header>
+
+  <!-- ── Stage Cards ─────────────────────────────────────── -->
+  <main id="stages-container" aria-label="Coaching stages"></main>
+
+  <!-- ── Celebration ────────────────────────────────────── -->
+  <div class="celebrate" id="celebration" aria-live="polite"></div>
+
+  <!-- ── Reset All ─────────────────────────────────────── -->
+  <div class="reset-wrapper">
+    <button class="btn btn-danger" id="reset-all-btn">Reset All Stages</button>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
