@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Become a Confident Coach | The G.R.E.A.T. Method</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background-color: #fdfaf6;
+      color: #2c2c2c;
+      line-height: 1.75;
+    }
+
+    /* ── Hero ──────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+      color: #fff;
+      text-align: center;
+      padding: 80px 24px 60px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 20px;
+      line-height: 1.25;
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      max-width: 640px;
+      margin: 0 auto 36px;
+      opacity: 0.9;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: #c9a84c;
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 16px 40px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+      transition: background 0.2s ease;
+    }
+
+    .btn-primary:hover { background: #a8882e; }
+
+    /* ── Sections ────────────────────────────────────────── */
+    section {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+
+    section h2 {
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      color: #0f3460;
+      margin-bottom: 24px;
+      border-left: 4px solid #c9a84c;
+      padding-left: 14px;
+    }
+
+    /* ── Checklist ───────────────────────────────────────── */
+    .checklist {
+      list-style: none;
+      display: grid;
+      gap: 14px;
+    }
+
+    .checklist li {
+      font-size: 1.05rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .checklist li::before {
+      content: '✔';
+      color: #c9a84c;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── Divider ─────────────────────────────────────────── */
+    .divider {
+      border: none;
+      border-top: 1px solid #e4d9c8;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    /* ── Pricing ─────────────────────────────────────────── */
+    .pricing {
+      text-align: center;
+      background: #0f3460;
+      color: #fff;
+      padding: 60px 24px;
+    }
+
+    .pricing .price {
+      font-size: clamp(2.5rem, 7vw, 4rem);
+      font-weight: 700;
+      color: #c9a84c;
+      margin: 16px 0 28px;
+    }
+
+    .pricing p {
+      font-size: 1rem;
+      opacity: 0.85;
+      margin-bottom: 32px;
+    }
+
+    /* ── Footer ──────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 28px 24px;
+      font-size: 0.875rem;
+      color: #888;
+      border-top: 1px solid #e4d9c8;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <header class="hero">
+    <h1>Become a Confident Coach</h1>
+    <p>
+      You don't need more theory.<br />
+      You need a system that tells you what to say, when to say it,
+      and how to lead transformation.
+    </p>
+    <a href="#enroll" class="btn-primary">Enroll Now — $197</a>
+  </header>
+
+  <!-- What's Inside -->
+  <section>
+    <h2>Inside This Program</h2>
+    <ul class="checklist">
+      <li>Step-by-step coaching structure</li>
+      <li>Real coaching scripts</li>
+      <li>Faith-based integration</li>
+      <li>Certification</li>
+    </ul>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Who It's For -->
+  <section>
+    <h2>This Is for You If&hellip;</h2>
+    <ul class="checklist">
+      <li>You're a new coach</li>
+      <li>You feel unsure during sessions</li>
+      <li>You want a proven framework</li>
+    </ul>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Pricing / CTA -->
+  <div class="pricing" id="enroll">
+    <h2 style="border:none; padding:0; color:#fff; text-align:center;">
+      Ready to Lead with Confidence?
+    </h2>
+    <p class="price">$197</p>
+    <p>One-time investment &bull; Instant access &bull; Faith-based framework</p>
+    <a href="#" class="btn-primary">Get Instant Access</a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>Created by <strong>Sisy Orobitg, MBA, Certified Coach</strong></p>
+    <p>&copy; <span id="year"></span> The G.R.E.A.T. Method. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
