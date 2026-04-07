@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certificate | G.R.E.A.T. Coaching Method™</title>
+
+<style>
+body {
+  margin:0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg,#042F2E,#0F766E);
+  color:white;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:40px 20px;
+}
+h1 {
+  color:#FFD700;
+  font-size:28px;
+  margin-bottom:20px;
+}
+canvas {
+  border-radius:12px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.5);
+  max-width:100%;
+}
+.actions {
+  margin-top:24px;
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.button {
+  background:#FFD700;
+  color:black;
+  padding:14px 24px;
+  border:none;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+  font-size:15px;
+}
+.button.outline {
+  background:transparent;
+  color:#FFD700;
+  border:2px solid #FFD700;
+}
+.footer {
+  margin-top:40px;
+  font-size:13px;
+  opacity:0.7;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Your Certificate of Completion</h1>
+
+<canvas id="certCanvas" width="600" height="420"></canvas>
+
+<div class="actions">
+  <button class="button" onclick="downloadCert()">⬇ Download Certificate</button>
+  <button class="button outline" onclick="location.href='dashboard.html'">← Back to Dashboard</button>
+</div>
+
+<div class="footer">
+  © 2026 Sisy Orobitg | G.R.E.A.T. Coaching Method™
+</div>
+
+<script>
+(function () {
+  var canvas = document.getElementById('certCanvas');
+  var ctx = canvas.getContext('2d');
+
+  // Background
+  var bg = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+  bg.addColorStop(0, '#042F2E');
+  bg.addColorStop(1, '#0F766E');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Gold border
+  ctx.strokeStyle = '#FFD700';
+  ctx.lineWidth = 8;
+  ctx.strokeRect(16, 16, canvas.width - 32, canvas.height - 32);
+
+  // Inner decorative border
+  ctx.strokeStyle = 'rgba(255,215,0,0.4)';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(28, 28, canvas.width - 56, canvas.height - 56);
+
+  // Title
+  ctx.fillStyle = '#FFD700';
+  ctx.font = 'bold 28px Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('Certificate of Achievement', canvas.width / 2, 90);
+
+  // Divider
+  ctx.strokeStyle = '#FFD700';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(80, 110);
+  ctx.lineTo(520, 110);
+  ctx.stroke();
+
+  // "This certifies that"
+  ctx.fillStyle = 'rgba(255,255,255,0.85)';
+  ctx.font = 'italic 18px Georgia, serif';
+  ctx.fillText('This certifies that', canvas.width / 2, 160);
+
+  // Recipient name placeholder
+  ctx.fillStyle = '#ffffff';
+  ctx.font = 'bold 26px Georgia, serif';
+  ctx.fillText('Sisy Orobitg, MBA', canvas.width / 2, 210);
+
+  // "has successfully completed"
+  ctx.fillStyle = 'rgba(255,255,255,0.85)';
+  ctx.font = 'italic 18px Georgia, serif';
+  ctx.fillText('has successfully completed', canvas.width / 2, 260);
+
+  // Program name — primary canvas line from problem statement
+  ctx.fillStyle = '#FFD700';
+  ctx.font = 'bold 20px Georgia, serif';
+  ctx.fillText('Certified G.R.E.A.T. Method Coach', 200, 320);
+
+  // Date
+  ctx.fillStyle = 'rgba(255,255,255,0.7)';
+  ctx.font = '14px Segoe UI, sans-serif';
+  var today = new Date();
+  var dateStr = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  ctx.textAlign = 'left';
+  ctx.fillText('Date: ' + dateStr, 50, canvas.height - 50);
+
+  // Signature area
+  ctx.textAlign = 'right';
+  ctx.fillStyle = '#FFD700';
+  ctx.font = 'italic 15px Georgia, serif';
+  ctx.fillText('Sisy Orobitg, MBA', canvas.width - 50, canvas.height - 60);
+  ctx.fillStyle = 'rgba(255,255,255,0.7)';
+  ctx.font = '13px Segoe UI, sans-serif';
+  ctx.fillText('Founder, G.R.E.A.T. Coaching Method™', canvas.width - 50, canvas.height - 42);
+})();
+
+function downloadCert() {
+  var canvas = document.getElementById('certCanvas');
+  var link = document.createElement('a');
+  link.download = 'GREAT-Method-Certificate.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+</script>
+
+</body>
+</html>
