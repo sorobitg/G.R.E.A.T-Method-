@@ -1,90 +1,1316 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>G.R.E.A.T. Coaching Method™</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>G.R.E.A.T. Coaching Method™ | Academy</title>
 
-<style>
-body {
-  margin:0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg,#042F2E,#0F766E);
-  color:white;
-}
-.container {
-  max-width:1100px;
-  margin:auto;
-  padding:60px 20px;
-}
-h1 {
-  color:#FFD700;
-  font-size:42px;
-}
-.hero {
-  text-align:center;
-  margin-bottom:50px;
-}
-.card {
-  background: rgba(255,255,255,0.08);
-  padding:25px;
-  border-radius:14px;
-  margin:20px 0;
-}
-.button {
-  background:#FFD700;
-  color:black;
-  padding:14px 24px;
-  border:none;
-  border-radius:8px;
-  font-weight:bold;
-  cursor:pointer;
-}
-.footer {
-  margin-top:60px;
-  font-size:14px;
-  opacity:0.7;
-}
-</style>
+  <!-- ============================================================
+       INLINE STYLES
+       Palette: dark-teal background, gold (#FFD700) accents
+  ============================================================ -->
+  <style>
+
+    /* ---------- RESET & BASE ---------- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(160deg, #042F2E 0%, #0F766E 100%);
+      background-attachment: fixed;
+      color: #E2F0EF;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    h1, h2, h3 { color: #FFD700; line-height: 1.25; }
+
+    p { line-height: 1.7; }
+
+    ul { padding-left: 1.4rem; }
+    ul li { margin-bottom: .4rem; }
+
+    textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,215,0,0.4);
+      border-radius: 8px;
+      color: #E2F0EF;
+      padding: 12px;
+      font-size: 15px;
+      resize: vertical;
+      min-height: 100px;
+    }
+    textarea::placeholder { color: rgba(255,255,255,0.45); }
+    textarea:focus { outline: none; border-color: #FFD700; }
+
+    /* ---------- PROGRESS BAR (top fixed) ---------- */
+    #progress-bar-wrap {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      background: rgba(255,255,255,0.15);
+      z-index: 1100;
+    }
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #FFD700, #FFA500);
+      transition: width .5s ease;
+    }
+
+    /* ---------- TOP NAVIGATION ---------- */
+    nav#top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(4,47,46,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,215,0,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 60px;
+    }
+
+    .nav-brand {
+      font-size: 18px;
+      font-weight: 700;
+      color: #FFD700;
+      letter-spacing: .5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 6px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 14px;
+      color: #E2F0EF;
+      transition: background .2s, color .2s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: rgba(255,215,0,0.18);
+      color: #FFD700;
+    }
+
+    /* hamburger */
+    #nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+    #nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #FFD700;
+      border-radius: 2px;
+      transition: .3s;
+    }
+
+    /* ---------- MAIN LAYOUT ---------- */
+    #app {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+
+    /* ---------- SHARED SECTION STYLES ---------- */
+    .page-section {
+      padding: 70px 0 50px;
+    }
+
+    .section-header {
+      margin-bottom: 36px;
+    }
+    .section-header h1 { font-size: clamp(28px, 5vw, 42px); margin-bottom: 10px; }
+    .section-header h2 { font-size: clamp(22px, 4vw, 32px); margin-bottom: 10px; }
+    .section-header p  { opacity: .85; font-size: 16px; }
+
+    /* ---------- CARD ---------- */
+    .card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 28px 32px;
+      margin-bottom: 22px;
+      transition: border-color .2s;
+    }
+    .card:hover { border-color: rgba(255,215,0,0.35); }
+    .card h2 { font-size: 20px; margin-bottom: 10px; }
+    .card h3 { font-size: 17px; color: #7FFFD4; margin-bottom: 8px; }
+
+    /* ---------- BUTTON ---------- */
+    .btn {
+      display: inline-block;
+      padding: 13px 26px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      border: none;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.3); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-gold   { background: #FFD700; color: #042F2E; }
+    .btn-outline { background: transparent; border: 2px solid #FFD700; color: #FFD700; }
+    .btn-complete {
+      background: rgba(255,215,0,0.12);
+      border: 1px solid #FFD700;
+      color: #FFD700;
+      font-size: 13px;
+      padding: 9px 18px;
+    }
+    .btn-complete.done {
+      background: #FFD700;
+      color: #042F2E;
+    }
+
+    /* ---------- HOME SECTION ---------- */
+    #home .hero {
+      text-align: center;
+      padding: 60px 0 40px;
+    }
+    #home .hero h1 { font-size: clamp(32px, 6vw, 52px); margin-bottom: 16px; }
+    #home .hero p  { font-size: 18px; opacity: .9; margin-bottom: 8px; }
+    #home .hero .cta-row { margin-top: 32px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255,215,0,0.15);
+      border: 1px solid rgba(255,215,0,0.5);
+      color: #FFD700;
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+      gap: 18px;
+      margin-top: 16px;
+    }
+    .feature-item {
+      background: rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 22px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .feature-icon { font-size: 26px; flex-shrink: 0; }
+
+    /* ---------- DASHBOARD SECTION ---------- */
+    #dashboard .dash-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      background: rgba(4,47,46,0.7);
+      border: 1px solid rgba(255,215,0,0.2);
+      border-radius: 14px;
+      padding: 22px;
+      position: sticky;
+      top: 74px;
+    }
+    .sidebar h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: #7FFFD4; margin-bottom: 16px; }
+
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 6px;
+      transition: background .2s;
+      color: #E2F0EF;
+    }
+    .sidebar-link:hover { background: rgba(255,215,0,0.12); color: #FFD700; }
+    .sidebar-link.locked { opacity: .5; cursor: not-allowed; }
+    .sidebar-link.unlocked { color: #E2F0EF; }
+    .sidebar-link.completed { color: #7FFFD4; }
+    .sidebar-link .status-icon { margin-left: auto; font-size: 13px; }
+
+    /* Dashboard overview stats */
+    .stats-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .stat-card {
+      flex: 1 1 120px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 18px 20px;
+      text-align: center;
+    }
+    .stat-card .stat-num { font-size: 32px; font-weight: 700; color: #FFD700; }
+    .stat-card .stat-label { font-size: 13px; opacity: .75; margin-top: 4px; }
+
+    .progress-wrap {
+      background: rgba(255,255,255,0.12);
+      border-radius: 99px;
+      height: 10px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, #FFD700, #FFA500);
+      transition: width .6s ease;
+    }
+
+    /* ---------- MODULE SECTIONS ---------- */
+    .module-section { padding: 70px 0 50px; }
+
+    .module-tag {
+      display: inline-block;
+      background: rgba(255,215,0,0.15);
+      color: #FFD700;
+      border-radius: 6px;
+      padding: 3px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    /* Video embed placeholder */
+    .video-placeholder {
+      background: rgba(0,0,0,0.4);
+      border: 2px dashed rgba(255,215,0,0.4);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      height: 280px;
+      margin-bottom: 24px;
+      color: rgba(255,255,255,0.55);
+      font-size: 15px;
+    }
+    .video-placeholder .play-icon { font-size: 52px; opacity: .7; }
+    .video-placeholder small { font-size: 12px; opacity: .6; }
+
+    /* Question block */
+    .question-block { margin: 20px 0; }
+    .question-block label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #7FFFD4;
+      font-size: 15px;
+    }
+
+    /* Faith reflection */
+    .faith-card {
+      background: rgba(255,215,0,0.07);
+      border-left: 4px solid #FFD700;
+      border-radius: 0 12px 12px 0;
+      padding: 20px 24px;
+      margin: 24px 0;
+      font-style: italic;
+    }
+    .faith-card .faith-title {
+      font-style: normal;
+      font-weight: 700;
+      color: #FFD700;
+      font-size: 14px;
+      letter-spacing: .5px;
+      margin-bottom: 8px;
+    }
+
+    /* Coaching insight */
+    .insight-card {
+      background: rgba(127,255,212,0.07);
+      border-left: 4px solid #7FFFD4;
+      border-radius: 0 12px 12px 0;
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+    .insight-card .insight-title {
+      font-weight: 700;
+      color: #7FFFD4;
+      font-size: 14px;
+      letter-spacing: .5px;
+      margin-bottom: 8px;
+    }
+
+    .module-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* ---------- CERTIFICATE SECTION ---------- */
+    #certificate .cert-card {
+      text-align: center;
+      padding: 60px 40px;
+      background: rgba(255,215,0,0.06);
+      border: 2px solid rgba(255,215,0,0.35);
+      border-radius: 20px;
+      max-width: 680px;
+      margin: 0 auto 40px;
+    }
+    #certificate .cert-card h1 { font-size: clamp(24px, 4vw, 36px); margin-bottom: 14px; }
+    #certificate .cert-card p  { font-size: 17px; opacity: .85; }
+    #certificate .cert-icon { font-size: 72px; margin-bottom: 18px; }
+
+    /* ---------- CTA SECTION ---------- */
+    #cta-section {
+      background: rgba(255,215,0,0.08);
+      border: 1px solid rgba(255,215,0,0.25);
+      border-radius: 20px;
+      text-align: center;
+      padding: 60px 40px;
+      margin-top: 60px;
+    }
+    #cta-section h2 { font-size: clamp(22px, 4vw, 32px); margin-bottom: 14px; }
+    #cta-section p  { opacity: .85; font-size: 16px; margin-bottom: 28px; max-width: 560px; margin-left: auto; margin-right: auto; }
+    #cta-section .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      text-align: center;
+      padding: 32px 20px;
+      font-size: 13px;
+      opacity: .6;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: 60px;
+    }
+
+    /* ---------- TOAST NOTIFICATION ---------- */
+    #toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #042F2E;
+      color: #FFD700;
+      border: 1px solid rgba(255,215,0,0.5);
+      padding: 14px 26px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.4);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 2000;
+      white-space: nowrap;
+      max-width: 90vw;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: opacity .3s ease, transform .3s ease;
+    }
+    #toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ---------- DIVIDER ---------- */
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin: 10px 0 40px;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 768px) {
+      /* Hamburger */
+      #nav-toggle { display: flex; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0; right: 0;
+        background: rgba(4,47,46,0.98);
+        flex-direction: column;
+        padding: 16px 24px 24px;
+        border-bottom: 1px solid rgba(255,215,0,0.25);
+        gap: 4px;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 12px 14px; font-size: 15px; }
+
+      /* Dashboard layout stacks */
+      #dashboard .dash-layout {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        position: static;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(130px,1fr));
+        gap: 6px;
+      }
+      .sidebar h3 { grid-column: 1/-1; }
+
+      /* Certificate */
+      #certificate .cert-card { padding: 40px 24px; }
+
+      /* CTA */
+      #cta-section { padding: 40px 24px; }
+    }
+
+    @media (max-width: 480px) {
+      .stats-row { gap: 10px; }
+      .module-footer { flex-direction: column; align-items: flex-start; }
+    }
+
+  </style>
 </head>
 
 <body>
 
-<div class="container">
+  <!-- ============================================================
+       GLOBAL PROGRESS BAR (fixed top)
+  ============================================================ -->
+  <div id="progress-bar-wrap" aria-hidden="true">
+    <div id="progress-bar"></div>
+  </div>
 
-<div class="hero">
-<h1>G.R.E.A.T. Coaching Method™</h1>
-<p><strong>Sisy Orobitg, MBA | Certified Coach</strong></p>
-<p>Become the coach who leads with clarity, confidence, and purpose.</p>
-<br>
-<button class="button" onclick="location.href='dashboard.html'">
-Enter the Academy →
-</button>
-</div>
+  <!-- ============================================================
+       TOP NAVIGATION
+  ============================================================ -->
+  <nav id="top-nav">
+    <span class="nav-brand">G.R.E.A.T.™</span>
 
-<div class="card">
-<h2>What You Will Master</h2>
-<ul>
-<li>✔ Structured coaching conversations</li>
-<li>✔ Confidence as a new coach</li>
-<li>✔ Faith-aligned client transformation</li>
-<li>✔ A repeatable coaching system</li>
-</ul>
-</div>
+    <button id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
 
-<div class="card">
-<h2>Your Transformation</h2>
-<p>
-You will no longer wonder what to say next.  
-You will lead sessions with clarity, presence, and purpose.
-</p>
-</div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#home"        class="nav-link active">Home</a></li>
+      <li><a href="#dashboard"   class="nav-link">Dashboard</a></li>
+      <li><a href="#module1"     class="nav-link">Modules</a></li>
+      <li><a href="#certificate" class="nav-link">Certification</a></li>
+    </ul>
+  </nav>
 
-<div class="footer">
-© 2026 Sisy Orobitg | G.R.E.A.T. Coaching Method™
-</div>
+  <!-- ============================================================
+       MAIN APP WRAPPER
+  ============================================================ -->
+  <div id="app">
 
-</div>
+    <!-- ========================================================
+         SECTION: HOME
+    ======================================================== -->
+    <section id="home" class="page-section">
+
+      <div class="hero">
+        <span class="badge">✦ Premium Coaching Academy</span>
+        <h1>G.R.E.A.T. Coaching Method™</h1>
+        <p><strong>Sisy Orobitg, MBA | Certified Coach</strong></p>
+        <p>Become the coach who leads with clarity, confidence, and purpose.</p>
+        <div class="cta-row">
+          <a href="#dashboard" class="btn btn-gold">Enter the Academy →</a>
+          <a href="#module1"   class="btn btn-outline">Start Module 1</a>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="section-header">
+        <h2>What You Will Master</h2>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature-item">
+          <span class="feature-icon">🎯</span>
+          <div>
+            <strong>Structured Conversations</strong>
+            <p style="font-size:14px;opacity:.8;margin-top:5px;">A proven 5-step framework for every coaching session.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">💪</span>
+          <div>
+            <strong>Confidence as a New Coach</strong>
+            <p style="font-size:14px;opacity:.8;margin-top:5px;">Show up prepared and grounded every time.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">✝️</span>
+          <div>
+            <strong>Faith-Aligned Transformation</strong>
+            <p style="font-size:14px;opacity:.8;margin-top:5px;">Coach from your values with purpose-driven questions.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🔄</span>
+          <div>
+            <strong>A Repeatable System</strong>
+            <p style="font-size:14px;opacity:.8;margin-top:5px;">Get results consistently—session after session.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:30px;">
+        <h2>Your Transformation</h2>
+        <p>
+          You will no longer wonder what to say next. You will lead sessions with
+          clarity, presence, and purpose — and your clients will feel the difference.
+        </p>
+      </div>
+
+    </section><!-- /#home -->
+
+    <!-- ========================================================
+         SECTION: DASHBOARD
+    ======================================================== -->
+    <section id="dashboard" class="page-section">
+      <div class="section-header">
+        <h2>Academy Dashboard</h2>
+        <p>Welcome back, Coach. Your journey through the G.R.E.A.T. Method™ begins here.</p>
+      </div>
+
+      <!-- Overall progress -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-num" id="completed-count">0</div>
+          <div class="stat-label">Modules Complete</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">5</div>
+          <div class="stat-label">Total Modules</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="pct-complete">0%</div>
+          <div class="stat-label">Overall Progress</div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:28px;">
+        <h3 style="margin-bottom:10px;">Overall Progress</h3>
+        <div class="progress-wrap">
+          <div class="progress-fill" id="dash-progress" style="width:0%"></div>
+        </div>
+      </div>
+
+      <!-- Sidebar + content layout -->
+      <div class="dash-layout">
+
+        <!-- Sidebar navigation -->
+        <aside class="sidebar">
+          <h3>Course Modules</h3>
+
+          <a href="#module1" class="sidebar-link unlocked" id="sb-m1" onclick="scrollToSection('module1')">
+            <span>📌</span> Module 1 — Goal Setting
+            <span class="status-icon" id="sb-m1-icon">○</span>
+          </a>
+          <a href="#module2" class="sidebar-link locked" id="sb-m2" onclick="sidebarClick(event,'module2')">
+            <span>🔒</span> Module 2 — Reality Check
+            <span class="status-icon" id="sb-m2-icon">🔒</span>
+          </a>
+          <a href="#module3" class="sidebar-link locked" id="sb-m3" onclick="sidebarClick(event,'module3')">
+            <span>🔒</span> Module 3 — Explore Options
+            <span class="status-icon" id="sb-m3-icon">🔒</span>
+          </a>
+          <a href="#module4" class="sidebar-link locked" id="sb-m4" onclick="sidebarClick(event,'module4')">
+            <span>🔒</span> Module 4 — Action Plan
+            <span class="status-icon" id="sb-m4-icon">🔒</span>
+          </a>
+          <a href="#module5" class="sidebar-link locked" id="sb-m5" onclick="sidebarClick(event,'module5')">
+            <span>🔒</span> Module 5 — Transform &amp; Thrive
+            <span class="status-icon" id="sb-m5-icon">🔒</span>
+          </a>
+          <a href="#certificate" class="sidebar-link locked" id="sb-cert" onclick="sidebarClick(event,'certificate')">
+            <span>🔒</span> Certification
+            <span class="status-icon" id="sb-cert-icon">🔒</span>
+          </a>
+        </aside>
+
+        <!-- Dashboard overview content -->
+        <div class="dash-content">
+          <div class="card">
+            <h2>G — Goal Setting</h2>
+            <p>Clarify what your client truly wants and set powerful, meaningful goals.</p>
+          </div>
+          <div class="card">
+            <h2>R — Reality Check</h2>
+            <p>Explore the current situation with honesty and compassion.</p>
+          </div>
+          <div class="card">
+            <h2>E — Explore Options</h2>
+            <p>Discover possibilities and strategies to move forward.</p>
+          </div>
+          <div class="card">
+            <h2>A — Action Plan</h2>
+            <p>Create a clear, actionable plan with accountability built in.</p>
+          </div>
+          <div class="card">
+            <h2>T — Transform &amp; Thrive</h2>
+            <p>Support your client in stepping into their fullest potential.</p>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- /#dashboard -->
+
+    <!-- ========================================================
+         SECTION: MODULE 1 — GOAL SETTING
+    ======================================================== -->
+    <section id="module1" class="module-section">
+      <span class="module-tag">Module 1</span>
+      <div class="section-header">
+        <h2>G — Goal Setting</h2>
+        <p>Clarify what your client truly wants and set powerful, meaningful goals.</p>
+      </div>
+
+      <!-- Loom video embed placeholder -->
+      <div class="video-placeholder">
+        <span class="play-icon">▶</span>
+        <span>Module 1 Lesson Video</span>
+        <small>Paste your Loom embed URL here</small>
+      </div>
+      <!-- To embed a real Loom video, replace the div above with:
+           <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;margin-bottom:24px;">
+             <iframe src="https://www.loom.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen
+               style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+           </div>
+      -->
+
+      <div class="insight-card">
+        <div class="insight-title">💡 Coaching Insight</div>
+        <p>
+          Goal Setting is the foundation of every powerful coaching conversation.
+          A well-crafted goal is specific, emotionally connected, and aligned with
+          the client's deeper values — not just an outcome on a to-do list.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Key Concepts</h3>
+        <ul>
+          <li>What does the client <em>really</em> want — beyond the surface goal?</li>
+          <li>Distinguish between outcomes (results) and process goals (actions).</li>
+          <li>Use the GREAT framework to anchor the goal to a bigger purpose.</li>
+          <li>The coach's job is to help the client own the goal fully.</li>
+        </ul>
+      </div>
+
+      <!-- Reflection questions -->
+      <div class="card">
+        <h3>Reflection Questions</h3>
+
+        <div class="question-block">
+          <label>1. What does your client say they want — and what do you sense lies beneath it?</label>
+          <textarea placeholder="Write your thoughts here…"></textarea>
+        </div>
+        <div class="question-block">
+          <label>2. How will you check whether the goal is truly aligned with the client's values?</label>
+          <textarea placeholder="Write your thoughts here…"></textarea>
+        </div>
+        <div class="question-block">
+          <label>3. What powerful question could you ask to help the client connect to their "why"?</label>
+          <textarea placeholder="Write your thoughts here…"></textarea>
+        </div>
+      </div>
+
+      <!-- Coaching exercise -->
+      <div class="card">
+        <h3>🛠 Coaching Exercise</h3>
+        <p style="margin-bottom:14px;">
+          Practice setting a goal for yourself using the GREAT framework.
+          Write a goal that is specific, emotionally meaningful, and connected to your purpose as a coach.
+        </p>
+        <textarea rows="5" placeholder="My coaching goal for this week is…"></textarea>
+      </div>
+
+      <div class="faith-card">
+        <div class="faith-title">✝️ Faith Reflection</div>
+        <p>
+          "Commit your work to the Lord, and your plans will be established." — Proverbs 16:3
+        </p>
+        <div class="question-block" style="margin-top:14px;">
+          <label>How does this verse shape the way you help clients set and pursue their goals?</label>
+          <textarea placeholder="Reflect here…"></textarea>
+        </div>
+      </div>
+
+      <div class="module-footer">
+        <a href="#module2" class="btn btn-gold">Next: Module 2 →</a>
+        <button class="btn btn-complete" onclick="markComplete(1, this)">✓ Mark Complete</button>
+      </div>
+    </section><!-- /#module1 -->
+
+    <!-- ========================================================
+         SECTION: MODULE 2 — REALITY CHECK
+    ======================================================== -->
+    <section id="module2" class="module-section">
+      <span class="module-tag">Module 2</span>
+      <div class="section-header">
+        <h2>R — Reality Check</h2>
+        <p>Explore the current situation with honesty and compassion.</p>
+      </div>
+
+      <div class="video-placeholder">
+        <span class="play-icon">▶</span>
+        <span>Module 2 Lesson Video</span>
+        <small>Paste your Loom embed URL here</small>
+      </div>
+
+      <div class="insight-card">
+        <div class="insight-title">💡 Coaching Insight</div>
+        <p>
+          The Reality Check step invites the client into honest self-assessment.
+          This is not about problem-solving — it's about witnessing where the client
+          truly stands with curiosity and without judgment.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Key Concepts</h3>
+        <ul>
+          <li>Create psychological safety before diving into the current reality.</li>
+          <li>Listen for what is <em>not</em> being said — the gap between words and energy.</li>
+          <li>Avoid advice; instead, use open-ended questions to uncover insight.</li>
+          <li>Help the client distinguish between facts, interpretations, and emotions.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Reflection Questions</h3>
+        <div class="question-block">
+          <label>1. What is the client's current reality — and how are they feeling about it?</label>
+          <textarea placeholder="Write your thoughts here…"></textarea>
+        </div>
+        <div class="question-block">
+          <label>2. What patterns or stories is the client telling themselves?</label>
+          <textarea placeholder="Write your thoughts here…"></textarea>
+        </div>
+        <div class="question-block">
+          <label>3. What question could help the client see their situation from a new perspective?</label>
+          <textarea placeholder="Write your thoughts here…"></textarea>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🛠 Coaching Exercise</h3>
+        <p style="margin-bottom:14px;">
+          Map your own current reality as a coach: Where are you now?
+          What is working, what is challenging, and what do you notice about your mindset?
+        </p>
+        <textarea rows="5" placeholder="My current reality as a coach is…"></textarea>
+      </div>
+
+      <div class="faith-card">
+        <div class="faith-title">✝️ Faith Reflection</div>
+        <p>
+          "The truth will set you free." — John 8:32
+        </p>
+        <div class="question-block" style="margin-top:14px;">
+          <label>How does creating a space of truth and safety transform what is possible for your client?</label>
+          <textarea placeholder="Reflect here…"></textarea>
+        </div>
+      </div>
+
+      <div class="module-footer">
+        <a href="#module3" class="btn btn-gold">Next: Module 3 →</a>
+        <button class="btn btn-complete" onclick="markComplete(2, this)">✓ Mark Complete</button>
+      </div>
+    </section><!-- /#module2 -->
+
+    <!-- ========================================================
+         SECTION: MODULE 3 — EXPLORE OPTIONS
+    ======================================================== -->
+    <section id="module3" class="module-section">
+      <span class="module-tag">Module 3</span>
+      <div class="section-header">
+        <h2>E — Explore Options</h2>
+        <p>Discover possibilities and strategies to move forward.</p>
+      </div>
+
+      <div class="video-placeholder">
+        <span class="play-icon">▶</span>
+        <span>Module 3 Lesson Video</span>
+        <small>Paste your Loom embed URL here</small>
+      </div>
+
+      <div class="insight-card">
+        <div class="insight-title">💡 Coaching Insight</div>
+        <p>
+          Exploring options is where possibility thinking comes alive. The coach's
+          role is to expand the client's view — not narrow it. Hold space for
+          creative, unconventional, and courageous ideas.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Key Concepts</h3>
+        <ul>
+          <li>Brainstorm without filtering — quantity before quality.</li>
+          <li>Use scaling questions: "On a scale of 1–10, how bold are you willing to be?"</li>
+          <li>Challenge limiting beliefs that prevent the client from seeing options.</li>
+          <li>Let the client do the work — resist the urge to suggest solutions.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Reflection Questions</h3>
+        <div class="question-block">
+          <label>1. What options has the client already considered — and which have they dismissed?</label>
+          <textarea placeholder="Write your thoughts here…"></textarea>
+        </div>
+        <div class="question-block">
+          <label>2. What belief is limiting the client's ability to see new possibilities?</label>
+          <textarea placeholder="Write your thoughts here…"></textarea>
+        </div>
+        <div class="question-block">
+          <label>3. What question could you ask to open up a completely new perspective?</label>
+          <textarea placeholder="Write your thoughts here…"></textarea>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🛠 Coaching Exercise</h3>
+        <p style="margin-bottom:14px;">
+          Generate 10 options for how you could grow as a coach this quarter.
+          Write them without filtering — include wild and realistic ideas alike.
+        </p>
+        <textarea rows="6" placeholder="10 options for my coaching growth…"></textarea>
+      </div>
+
+      <div class="faith-card">
+        <div class="faith-title">✝️ Faith Reflection</div>
+        <p>
+          "For I know the plans I have for you… plans to give you hope and a future." — Jeremiah 29:11
+        </p>
+        <div class="question-block" style="margin-top:14px;">
+          <label>How does trusting in a bigger plan allow you to explore more boldly with your clients?</label>
+          <textarea placeholder="Reflect here…"></textarea>
+        </div>
+      </div>
+
+      <div class="module-footer">
+        <a href="#module4" class="btn btn-gold">Next: Module 4 →</a>
+        <button class="btn btn-complete" onclick="markComplete(3, this)">✓ Mark Complete</button>
+      </div>
+    </section><!-- /#module3 -->
+
+    <!-- ========================================================
+         SECTION: MODULE 4 — ACTION PLAN
+    ======================================================== -->
+    <section id="module4" class="module-section">
+      <span class="module-tag">Module 4</span>
+      <div class="section-header">
+        <h2>A — Action Plan</h2>
+        <p>Create a clear, actionable plan with accountability built in.</p>
+      </div>
+
+      <div class="video-placeholder">
+        <span class="play-icon">▶</span>
+        <span>Module 4 Lesson Video</span>
+        <small>Paste your Loom embed URL here</small>
+      </div>
+
+      <div class="insight-card">
+        <div class="insight-title">💡 Coaching Insight</div>
+        <p>
+          An action plan bridges insight and impact. Commitment happens when the
+          client chooses their own next steps — not when the coach assigns them.
+          Focus on the smallest meaningful action that moves the needle.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Key Concepts</h3>
+        <ul>
+          <li>Ask the client to choose — "Which option feels right and bold enough?"</li>
+          <li>Make commitments specific: who, what, when, and how.</li>
+          <li>Build in accountability: "How will you know you've followed through?"</li>
+          <li>Identify obstacles in advance and plan for them.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Reflection Questions</h3>
+        <div class="question-block">
+          <label>1. What is the single most important action the client committed to?</label>
+          <textarea placeholder="Write your thoughts here…"></textarea>
+        </div>
+        <div class="question-block">
+          <label>2. What obstacle might get in the way — and how will the client handle it?</label>
+          <textarea placeholder="Write your thoughts here…"></textarea>
+        </div>
+        <div class="question-block">
+          <label>3. How will you hold this client accountable with compassion and firmness?</label>
+          <textarea placeholder="Write your thoughts here…"></textarea>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🛠 Coaching Exercise</h3>
+        <p style="margin-bottom:14px;">
+          Write your own action plan for completing this academy.
+          Be specific: what will you do, by when, and how will you stay accountable?
+        </p>
+        <textarea rows="5" placeholder="My action plan for completing the GREAT Academy…"></textarea>
+      </div>
+
+      <div class="faith-card">
+        <div class="faith-title">✝️ Faith Reflection</div>
+        <p>
+          "Whatever you do, work at it with all your heart, as working for the Lord." — Colossians 3:23
+        </p>
+        <div class="question-block" style="margin-top:14px;">
+          <label>How does doing your work "as for the Lord" elevate the accountability you offer your clients?</label>
+          <textarea placeholder="Reflect here…"></textarea>
+        </div>
+      </div>
+
+      <div class="module-footer">
+        <a href="#module5" class="btn btn-gold">Next: Module 5 →</a>
+        <button class="btn btn-complete" onclick="markComplete(4, this)">✓ Mark Complete</button>
+      </div>
+    </section><!-- /#module4 -->
+
+    <!-- ========================================================
+         SECTION: MODULE 5 — TRANSFORM & THRIVE
+    ======================================================== -->
+    <section id="module5" class="module-section">
+      <span class="module-tag">Module 5</span>
+      <div class="section-header">
+        <h2>T — Transform &amp; Thrive</h2>
+        <p>Support your client in stepping into their fullest potential.</p>
+      </div>
+
+      <div class="video-placeholder">
+        <span class="play-icon">▶</span>
+        <span>Module 5 Lesson Video</span>
+        <small>Paste your Loom embed URL here</small>
+      </div>
+
+      <div class="insight-card">
+        <div class="insight-title">💡 Coaching Insight</div>
+        <p>
+          Transformation is not a single moment — it's a sustained shift in how the
+          client sees themselves and the world. Your role is to witness, celebrate,
+          and anchor that shift so it becomes permanent.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Key Concepts</h3>
+        <ul>
+          <li>Acknowledge growth explicitly — clients often don't see how far they've come.</li>
+          <li>Help the client articulate their new identity: "Who are you becoming?"</li>
+          <li>Design rituals or practices that reinforce the transformation.</li>
+          <li>Close the engagement with a powerful celebration of the journey.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Reflection Questions</h3>
+        <div class="question-block">
+          <label>1. What has shifted most for your client throughout this coaching journey?</label>
+          <textarea placeholder="Write your thoughts here…"></textarea>
+        </div>
+        <div class="question-block">
+          <label>2. How will you help the client anchor and sustain this transformation?</label>
+          <textarea placeholder="Write your thoughts here…"></textarea>
+        </div>
+        <div class="question-block">
+          <label>3. What does it look like for this client to truly thrive?</label>
+          <textarea placeholder="Write your thoughts here…"></textarea>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🛠 Coaching Exercise — Capstone Reflection</h3>
+        <p style="margin-bottom:14px;">
+          Write a brief statement about who you have become as a coach through this program.
+          What are you now capable of that you were not before?
+        </p>
+        <textarea rows="6" placeholder="As a result of completing the G.R.E.A.T. Method™, I now…"></textarea>
+      </div>
+
+      <div class="faith-card">
+        <div class="faith-title">✝️ Faith Reflection</div>
+        <p>
+          "Therefore, if anyone is in Christ, the new creation has come: The old has gone, the new is here!" — 2 Corinthians 5:17
+        </p>
+        <div class="question-block" style="margin-top:14px;">
+          <label>How does the idea of "new creation" inspire the transformation you facilitate for your clients?</label>
+          <textarea placeholder="Reflect here…"></textarea>
+        </div>
+      </div>
+
+      <div class="module-footer">
+        <a href="#certificate" class="btn btn-gold">Claim Your Certification →</a>
+        <button class="btn btn-complete" onclick="markComplete(5, this)">✓ Mark Complete</button>
+      </div>
+    </section><!-- /#module5 -->
+
+    <!-- ========================================================
+         SECTION: CERTIFICATE / CERTIFICATION
+    ======================================================== -->
+    <section id="certificate" class="page-section">
+      <div class="section-header" style="text-align:center;">
+        <h2>Certification</h2>
+        <p>Complete all 5 modules to unlock your certificate of completion.</p>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon">🏅</div>
+        <h1>Certificate of Completion</h1>
+        <p style="color:#FFD700;font-size:20px;margin:14px 0 8px;font-weight:700;">G.R.E.A.T. Coaching Method™</p>
+        <p>
+          This certifies that you have successfully completed all five modules of the
+          G.R.E.A.T. Coaching Method™ Academy, developed by<br>
+          <strong>Sisy Orobitg, MBA | Certified Coach</strong>
+        </p>
+        <p style="margin-top:20px;opacity:.7;font-size:14px;">Complete all 5 modules to unlock and print your certificate.</p>
+        <div style="margin-top:28px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+          <button class="btn btn-gold" id="cert-btn" disabled style="opacity:.5;cursor:not-allowed;">
+            🎓 Download Certificate
+          </button>
+          <a href="#module1" class="btn btn-outline">Start from Module 1</a>
+        </div>
+      </div>
+    </section><!-- /#certificate -->
+
+    <!-- ========================================================
+         CTA SECTION — Upgrade / Continue Your Journey
+    ======================================================== -->
+    <div id="cta-section">
+      <h2>✨ Upgrade / Continue Your Journey</h2>
+      <p>
+        Ready to go deeper? Access advanced coaching frameworks, live group sessions,
+        and 1:1 mentorship with Sisy Orobitg — and build the coaching practice you were called to create.
+      </p>
+      <div class="cta-btns">
+        <a href="mailto:hello@sisyorobitg.com" class="btn btn-gold">Apply for Mentorship →</a>
+        <a href="#home" class="btn btn-outline">Review the Method</a>
+      </div>
+    </div>
+
+  </div><!-- /#app -->
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer>
+    © 2026 Sisy Orobitg | G.R.E.A.T. Coaching Method™ — All rights reserved.
+  </footer>
+
+  <!-- Toast notification element -->
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <!-- ============================================================
+       MINIMAL JAVASCRIPT
+       - Mobile nav toggle
+       - Active nav link highlighting
+       - Mark Complete + unlock logic
+       - Dashboard progress update
+       - Top progress bar scroll update
+  ============================================================ -->
+  <script>
+    // ---- Toast notification (replaces browser alert) ----
+    var toastTimer = null;
+    function showToast(msg) {
+      var toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function() { toast.classList.remove('show'); }, 3200);
+    }
+
+    // ---- Module completion state — persisted in localStorage ----
+    var STORAGE_KEY = 'great_completed';
+    var completed = (function() {
+      try {
+        var saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        if (Array.isArray(saved) && saved.length === 5) return saved;
+      } catch(e) {}
+      return [false, false, false, false, false];
+    })();
+
+    function saveCompleted() {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(completed)); } catch(e) {}
+    }
+
+    // ---- Mobile nav toggle ----
+    var navToggle = document.getElementById('nav-toggle');
+    var navLinks  = document.getElementById('nav-links');
+    navToggle.addEventListener('click', function() {
+      var open = navLinks.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', open);
+    });
+
+    // Close mobile nav when a link is clicked
+    document.querySelectorAll('.nav-link').forEach(function(link) {
+      link.addEventListener('click', function() {
+        navLinks.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // ---- Active nav link on scroll ----
+    var sections = document.querySelectorAll('section[id]');
+    var navLinkEls = document.querySelectorAll('.nav-link');
+
+    function updateActiveNav() {
+      var scrollY = window.scrollY + 80;
+      var current = '';
+      sections.forEach(function(sec) {
+        if (sec.offsetTop <= scrollY) current = sec.id;
+      });
+      navLinkEls.forEach(function(a) {
+        a.classList.remove('active');
+        var href = a.getAttribute('href').replace('#', '');
+        // "Modules" nav item activates for any module section
+        if (href === 'module1' && current.startsWith('module')) {
+          a.classList.add('active');
+        } else if (a.getAttribute('href') === '#' + current) {
+          a.classList.add('active');
+        }
+      });
+    }
+
+    // ---- Top progress bar on scroll ----
+    function updateScrollBar() {
+      var el   = document.documentElement;
+      var top  = el.scrollTop || document.body.scrollTop;
+      var full = el.scrollHeight - el.clientHeight;
+      var pct  = full > 0 ? Math.round((top / full) * 100) : 0;
+      document.getElementById('progress-bar').style.width = pct + '%';
+    }
+
+    window.addEventListener('scroll', function() {
+      updateActiveNav();
+      updateScrollBar();
+    }, { passive: true });
+
+    // ---- Apply saved state to UI ----
+    function applySavedState() {
+      completed.forEach(function(done, idx) {
+        if (done) applyModuleComplete(idx + 1, true);
+      });
+      updateDashboard();
+    }
+
+    // ---- Core function: apply module-complete UI (shared by new + restored) ----
+    function applyModuleComplete(moduleNum, silent) {
+      var nextMap    = { 1:'sb-m2', 2:'sb-m3', 3:'sb-m4', 4:'sb-m5', 5:'sb-cert' };
+      var iconMap    = { 1:'sb-m2-icon', 2:'sb-m3-icon', 3:'sb-m4-icon', 4:'sb-m5-icon', 5:'sb-cert-icon' };
+      var emojiMap   = { 1:'📌', 2:'📌', 3:'📌', 4:'📌', 5:'🏅' };
+      var curIconMap = { 1:'sb-m1-icon',2:'sb-m2-icon',3:'sb-m3-icon',4:'sb-m4-icon',5:'sb-m5-icon' };
+      var curSbMap   = { 1:'sb-m1',2:'sb-m2',3:'sb-m3',4:'sb-m4',5:'sb-m5' };
+
+      // Update the "Mark Complete" button for this module
+      var btns = document.querySelectorAll('[onclick*="markComplete(' + moduleNum + ',"]');
+      btns.forEach(function(btn) {
+        btn.textContent = '✅ Completed!';
+        btn.classList.add('done');
+        btn.disabled = true;
+      });
+
+      // Unlock next sidebar item
+      if (nextMap[moduleNum]) {
+        var sbEl = document.getElementById(nextMap[moduleNum]);
+        sbEl.classList.remove('locked');
+        sbEl.classList.add('unlocked');
+        sbEl.querySelector('span').textContent = emojiMap[moduleNum];
+        document.getElementById(iconMap[moduleNum]).textContent = '○';
+        sbEl.setAttribute('onclick', "scrollToSection('" + (moduleNum < 5 ? 'module'+(moduleNum+1) : 'certificate') + "')");
+      }
+
+      // Mark current sidebar icon
+      document.getElementById(curIconMap[moduleNum]).textContent = '✅';
+      document.getElementById(curSbMap[moduleNum]).classList.add('completed');
+
+      if (!silent) showToast('🎉 Module ' + moduleNum + ' complete! Keep going!');
+    }
+
+    // ---- Mark Complete — called from button onclick ----
+    function markComplete(moduleNum, btn) {
+      var idx = moduleNum - 1;
+      if (completed[idx]) return; // already done
+      completed[idx] = true;
+      saveCompleted();
+      applyModuleComplete(moduleNum, false);
+      updateDashboard();
+    }
+
+    // ---- Sidebar click guard (locked items) ----
+    function sidebarClick(event, target) {
+      var el = event.currentTarget || event.target.closest('.sidebar-link');
+      if (el && el.classList.contains('locked')) {
+        event.preventDefault();
+        showToast('🔒 Complete the previous module to unlock this one.');
+        return;
+      }
+      scrollToSection(target);
+    }
+
+    // ---- Smooth scroll helper ----
+    function scrollToSection(id) {
+      var el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // ---- Dashboard progress update ----
+    function updateDashboard() {
+      var done = completed.filter(Boolean).length;
+      document.getElementById('completed-count').textContent = done;
+      var pct = Math.round((done / 5) * 100);
+      document.getElementById('pct-complete').textContent = pct + '%';
+      document.getElementById('dash-progress').style.width = pct + '%';
+
+      // Unlock certificate button when all 5 complete
+      if (done === 5) {
+        var certBtn = document.getElementById('cert-btn');
+        certBtn.removeAttribute('disabled');
+        certBtn.style.opacity = '1';
+        certBtn.style.cursor  = 'pointer';
+        certBtn.onclick = function() {
+          showToast('🎓 Congratulations! Your certificate is ready. Add your PDF generation or print logic here.');
+        };
+      }
+    }
+
+    // ---- Init ----
+    updateActiveNav();
+    updateScrollBar();
+    applySavedState();
+  </script>
 
 </body>
 </html>
