@@ -45,6 +45,50 @@ h1 {
   font-size:14px;
   opacity:0.7;
 }
+
+/* ANIMATIONS */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* BUTTON MICRO-INTERACTION */
+.button {
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+/* CARD HOVER EFFECT */
+.card {
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* SMOOTH SECTION FADE */
+.section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 </style>
 </head>
 
@@ -52,7 +96,7 @@ h1 {
 
 <div class="container">
 
-<div class="hero">
+<div class="hero fade-in">
 <h1>G.R.E.A.T. Coaching Method™</h1>
 <p><strong>Sisy Orobitg, MBA | Certified Coach</strong></p>
 <p>Become the coach who leads with clarity, confidence, and purpose.</p>
@@ -62,7 +106,7 @@ Enter the Academy →
 </button>
 </div>
 
-<div class="card">
+<div class="card fade-in">
 <h2>What You Will Master</h2>
 <ul>
 <li>✔ Structured coaching conversations</li>
@@ -72,7 +116,7 @@ Enter the Academy →
 </ul>
 </div>
 
-<div class="card">
+<div class="card fade-in">
 <h2>Your Transformation</h2>
 <p>
 You will no longer wonder what to say next.  
@@ -85,6 +129,18 @@ You will lead sessions with clarity, presence, and purpose.
 </div>
 
 </div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in, .section').forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>

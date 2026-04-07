@@ -45,6 +45,50 @@ h1 {
   font-size:14px;
   opacity:0.7;
 }
+
+/* ANIMATIONS */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* BUTTON MICRO-INTERACTION */
+.button {
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+/* CARD HOVER EFFECT */
+.card {
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* SMOOTH SECTION FADE */
+.section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 </style>
 </head>
 
@@ -52,33 +96,33 @@ h1 {
 
 <div class="container">
 
-<div class="hero">
+<div class="hero fade-in">
 <h1>Welcome to the G.R.E.A.T. Academy</h1>
 <p><strong>Sisy Orobitg, MBA | Certified Coach</strong></p>
 <p>Your coaching journey begins here.</p>
 </div>
 
-<div class="card">
+<div class="card fade-in">
 <h2>G — Goal Setting</h2>
 <p>Clarify what your client truly wants and set powerful, meaningful goals.</p>
 </div>
 
-<div class="card">
+<div class="card fade-in">
 <h2>R — Reality Check</h2>
 <p>Explore the current situation with honesty and compassion.</p>
 </div>
 
-<div class="card">
+<div class="card fade-in">
 <h2>E — Explore Options</h2>
 <p>Discover possibilities and strategies to move forward.</p>
 </div>
 
-<div class="card">
+<div class="card fade-in">
 <h2>A — Action Plan</h2>
 <p>Create a clear, actionable plan with accountability built in.</p>
 </div>
 
-<div class="card">
+<div class="card fade-in">
 <h2>T — Transform & Thrive</h2>
 <p>Support your client in stepping into their fullest potential.</p>
 </div>
@@ -91,6 +135,18 @@ h1 {
 </div>
 
 </div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in, .section').forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
